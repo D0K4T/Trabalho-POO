@@ -1,0 +1,27 @@
+@startuml
+class CardapioDia {
+    - itens: List<CardapioItem>
+    + adicionarItem(item: CardapioItem): void
+    + removerItem(item: CardapioItem): void
+    + getItens(): List<CardapioItem>
+}
+
+class CardapioItem {
+    - nome: String
+    - descricao: String
+    + CardapioItem(nome: String, descricao: String)
+    + toString(): String
+}
+
+class RestauranteApp {
+    - cardapioSemanal: Map<String, CardapioDia>
+    - cardapioListModel: DefaultListModel<CardapioItem>
+    + createAndShowGUI(): void
+    + atualizarListaDoCardapio(dia: String): void
+    + salvarCardapio(filePath: String): void
+    + carregarCardapio(filePath: String): void
+}
+
+CardapioDia *-- "*" CardapioItem : contém
+RestauranteApp "1" --> "*" CardapioDia : gerencia
+@enduml
